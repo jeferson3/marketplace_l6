@@ -7,11 +7,10 @@ use Faker\Generator as Faker;
 
 $factory->define(Product::class, function (Faker $faker) {
     return [
-            'id_store' => '',
-            'name' =>  '',
-            'description' => '',
-            'body' => '',
-            'price' => '',
-            'slug' => ''
+        'name' => $faker->name,
+        'description' =>  $faker->sentense,
+        'body' => $faker->paragraph(5, true),
+        'price' => $faker->randomFloat(2, 10),
+        'slug' => $faker->slug
     ];
 });
