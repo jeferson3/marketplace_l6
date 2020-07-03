@@ -13,7 +13,7 @@ class CreateProductTable extends Migration
      */
     public function up()
     {
-        Schema::create('product', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_store');
             $table->string('name');
@@ -21,10 +21,7 @@ class CreateProductTable extends Migration
             $table->string('body');
             $table->decimal('price', 10, 2);
             $table->string('slug');
-
             $table->foreign('id_store')->references('id')->on('stores');
-
-
             $table->timestamps();
         });
     }
@@ -36,6 +33,6 @@ class CreateProductTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product');
+        Schema::dropIfExists('products');
     }
 }
