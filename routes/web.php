@@ -11,6 +11,13 @@
 |
 */
 
+use App\Product;
+
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('users/{id}', function ($id) {
+
+    return Product::All();
 });
