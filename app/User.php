@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -36,4 +37,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function store()
+    {
+        return $this->hasOne(Store::class); //relacionamento, um user tem uma loja
+    }
+
+    public function product()
+    {
+        return $this->hasMany(Product::class); //relacionamento, uma loja tem varios produtos;
+    }
 }
