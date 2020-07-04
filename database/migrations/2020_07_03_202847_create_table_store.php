@@ -16,7 +16,7 @@ class CreateTableStore extends Migration
         Schema::create('stores', function (Blueprint $table) {
             // colunas da tabela de lojas
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_user');
+            $table->unsignedBigInteger('user_id');
 
             $table->string('name');
             $table->string('description');
@@ -24,7 +24,7 @@ class CreateTableStore extends Migration
             $table->string('mobile_phone');
             $table->string('slug');
 
-            $table->foreign('id_user')->references('id')->on('users'); //define a coluna id_user como chave estrangeira que é referencia da coluna id da tabela users
+            $table->foreign('user_id')->references('id')->on('users'); //define a coluna id_user como chave estrangeira que é referencia da coluna id da tabela users
 
 
             $table->timestamps();
