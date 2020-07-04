@@ -15,5 +15,9 @@ class Store extends Model //procura por uma tabela chamada stores
     public function user(){
         return $this->belongsTo(User::class); //relacionamento, uma loja pertence a um user
     }
+    public function product()
+    {
+        return $this->hasMany(Product::class);
+    }
 
 }
