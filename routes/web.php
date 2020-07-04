@@ -71,3 +71,5 @@ Route::get('/', function () {
     // Product::find(41)->category()->detach([1]); //remove uma categoria de um produto
     return Product::find(41)->category;
 });
+
+Route::get('admin/stores', 'Admin\\StoreController@index');
