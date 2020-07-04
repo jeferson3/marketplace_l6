@@ -15,7 +15,7 @@ class Product extends Model //procura por uma tabela chamada products
         return $this->belongsTo(Store::class);
     }
 
-    public function categorie()
+    public function category()
     {
         return $this->belongsToMany(Category::class);  //relacionamento N:N, pertence a varias categorias
     }
