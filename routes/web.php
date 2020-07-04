@@ -16,7 +16,7 @@ Route::get('users/{id?}', function ($id = null) {
 
 // valores de relacionamentos
 
-Route::get('/', function () {
+Route::get('/teste', function () {
 
     ## retornando o usuario e sua loja ##
     // $user = User::find(1); //pega o usuario 1 da tabela
@@ -72,4 +72,18 @@ Route::get('/', function () {
     return Product::find(41)->category;
 });
 
-Route::get('admin/stores', 'Admin\\StoreController@index');
+Route::get('', function () {
+
+    return redirect('admin/stores');
+});
+
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
+    Route::group(['prefix' => 'stores'], function () {
+        Route::get('', 'StoreController@index')->name('store.index');
+        Route::get('/create', 'StoreController@create')->name('store.create');
+        Route::post('/store', 'StoreController@store')->name('store.store');
+        Route::get('/{id}/edit', 'StoreController@edit')->name('store.edit');
+        Route::put('/update/{id}', 'StoreController@update')->name('store.update');
+        Route::get('/delete/{id}', 'StoreController@delete')->name('store.delete');
+    });
+});
