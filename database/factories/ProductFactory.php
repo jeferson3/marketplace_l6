@@ -8,9 +8,9 @@ use Faker\Generator as Faker;
 $factory->define(Product::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
-        'description' =>  $faker->sentense,
-        'body' => $faker->paragraph(5, true),
-        'price' => $faker->randomFloat(2, 10),
+        'description' =>  $faker->sentence,
+        'body' => $faker->paragraph(2, true),
+        'price' => $faker->randomFloat(2, 0, 10),
         'slug' => $faker->slug
     ];
 });
