@@ -19,13 +19,17 @@
                                 <td>{{ $store->id }}</td>
                                 <td>{{ $store->name }}</td>
                                 <td>{{ $store->description }}</td>   
-                                <td>
-                                    <a href="{{ route('store.edit', $store->id ) }}">
-                                        <i class="fas fa-edit fas-2x"></i>
+                                <td class="row form-inline p-1 m-0">
+                                    <a href="{{ route('stores.edit', $store->id ) }}">
+                                        <i class="fas fa-edit fas-2x text-primary"></i>
                                     </a>
-                                    <a href="{{ route('store.delete', $store->id ) }}">
-                                        <i class="fas fa-trash-alt fas-2s"></i>
-                                    </a>
+                                    <form action="{{ route('stores.destroy', $store->id ) }}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn">
+                                            <i class="fas fa-trash-alt fas-2s text-primary"></i>
+                                        </button>
+                                    </form>
                                 </td> 
                             </tr>    
                         @endforeach
