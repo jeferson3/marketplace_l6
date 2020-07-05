@@ -78,12 +78,14 @@ Route::get('', function () {
 });
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
-    Route::group(['prefix' => 'stores'], function () {
-        Route::get('', 'StoreController@index')->name('store.index');
-        Route::get('/create', 'StoreController@create')->name('store.create');
-        Route::post('/store', 'StoreController@store')->name('store.store');
-        Route::get('/{id}/edit', 'StoreController@edit')->name('store.edit');
-        Route::put('/update/{id}', 'StoreController@update')->name('store.update');
-        Route::get('/delete/{id}', 'StoreController@delete')->name('store.delete');
-    });
+    // Route::group(['prefix' => 'stores'], function () {
+    //     Route::get('', 'StoreController@index')->name('store.index');
+    //     Route::get('/create', 'StoreController@create')->name('store.create');
+    //     Route::post('/store', 'StoreController@store')->name('store.store');
+    //     Route::get('/{id}/edit', 'StoreController@edit')->name('store.edit');
+    //     Route::post('/update/{id}', 'StoreController@update')->name('store.update');
+    //     Route::get('/delete/{id}', 'StoreController@destroy')->name('store.delete');
+    // });
+    Route::resource('stores', 'StoreController');
+    Route::resource('products', 'ProductController');
 });
