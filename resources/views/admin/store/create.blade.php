@@ -2,7 +2,7 @@
 @section('title', 'Create Store')
 @section('root')
     <h1>Criar loja</h1>
-    <form action="{{ route('store.store') }}" method="POST">
+    <form action="{{ route('stores.store') }}" method="POST">
         @csrf
         
         <div  class="form-group">
