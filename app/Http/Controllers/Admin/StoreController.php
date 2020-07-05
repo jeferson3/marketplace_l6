@@ -34,7 +34,7 @@ class StoreController extends Controller
     {
         $data = $this->request->all();
         $user = User::find($data['user']);
-        flash('Criado com sucesso')->success();
+        flash('Loja criada com sucesso')->success();
         return $user->store()->create($data);
     }
 
@@ -49,15 +49,15 @@ class StoreController extends Controller
 
         $store = Store::find($id);
         $store->update($this->request->all());
-        flash('Atualizado com sucesso')->success();
-        return redirect()->route('store.index');
+        flash('Loja atualizado com sucesso')->success();
+        return redirect()->route('stores.index');
     }
-    public function delete($id)
+    public function destroy($id)
     {
 
         $store = Store::find($id);
         $store->delete();
-        flash('Deletado com sucesso')->success();
-        return redirect()->route('store.index');
+        flash('Loja deletada com sucesso')->success();
+        return redirect()->route('stores.index');
     }
 }
