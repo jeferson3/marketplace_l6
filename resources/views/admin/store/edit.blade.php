@@ -4,7 +4,7 @@
 @section('root')
 <div class="row justify-content-center">
     <div class="col-md-8">
-        <form action="{{ route('store.update', $store->id) }}" method="POST">
+        <form action="{{ route('stores.update', $store->id) }}" method="POST">
             @csrf
             @method('PUT')
             
