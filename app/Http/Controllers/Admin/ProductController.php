@@ -3,18 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductRequest;
 use App\Product;
 use App\Store;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    private $request;
     private $product;
 
-    public function __construct(Request $request, Product $product)
+    public function __construct(Product $product)
     {
-        $this->request = $request;
         $this->product = $product;
     }
 
@@ -46,9 +45,9 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(ProductRequest $request)
     {
-        $product = $this->request->all();
+        $product = $request->all();
         $store = Store::findOrFail($product['store']);
         $store->product()->create($product);
 
@@ -83,10 +82,10 @@ class ProductController extends Controller
      * @param $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update($id, ProductRequest $request)
     {
         $product = $this->product::findOrFail($id);
-        $product->update($this->request->all());
+        $product->update($request->all());
         flash('Produto atualizado com sucesso')->success();
 
         return redirect()->route('products.index');
