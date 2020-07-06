@@ -18,8 +18,7 @@
                 </tr>
             </thead>
             <tbody>
-                    @isset($products)
-                        @foreach($products->all() as $product)
+                        @foreach($products as $product)
                             <tr>
                                 <td>{{ $product->id }}</td>
                                 <td>{{ $product->name }}</td>
@@ -40,7 +39,6 @@
                                 </td> 
                             </tr>    
                         @endforeach
-                    @endisset
                 </tbody>
             </table>
         </div>
