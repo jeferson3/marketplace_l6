@@ -3,6 +3,9 @@
 @section('root')
 <div class="row justify-content-center">
     <div class="col-md-8">
+        <div class="form-group">
+            <a class="btn btn-success" href="{{ route('stores.create') }}">Cadastrar loja</a>
+        </div>
         <table class="table table-responsive table-striped">
             <thead>
                 <tr>
