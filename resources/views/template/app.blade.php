@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
     <title>@yield('title')</title>
+
 </head>
 <body>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark" style="margin-bottom: 50px">
@@ -26,15 +27,25 @@
                 </li>
             </ul>
             @endauth
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav ml-auto mr-5">
                     @auth
                         <li class="nav-item">
-                            <form action="{{ route('logout') }}" method="post">
-                                @csrf
-                                <button class="btn text-white" type="submit">Sair
-                                    <i class="fas fa-sign-out-alt    "></i>
-                                </button>
-                            </form>
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <a href="#" class="nav-link dropdown-toggle" aria-label="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {{ auth()->user()->name }}
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <form id="logoutForm" action="{{ route('logout') }}" method="post" style="display: none">
+                                            @csrf
+                                        </form>
+                                        <a href="#" class="dropdown-item"
+                                            onclick="document.getElementById('logoutForm').submit();"
+                                        >Sair <i class="fas fa-sign-out-alt"></i></a>
+
+                                    </div>
+                                </span>
+                            </div>                            
                         </li>
                     @else
                         <li class="nav-item">
