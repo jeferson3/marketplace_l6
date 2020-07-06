@@ -2,6 +2,14 @@
 @section('title', 'Edit Store')
 
 @section('root')
+<div class="row">
+    <a href="{{ url()->previous() }}" style="text-decoration: none;">
+        <i class="fas fa-arrow-left my-auto mx-2"></i>
+        Voltar
+    </a>
+</div>
+
+<h1>Editar Loja</h1>
 <div class="row justify-content-center">
     <div class="col-md-8">
         <form action="{{ route('stores.update', $store->id) }}" method="POST">
