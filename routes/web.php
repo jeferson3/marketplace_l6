@@ -75,17 +75,12 @@ Route::get('/teste', function () {
 Route::get('', function () {
 
     return redirect('admin/stores');
-});
+})->name('home');
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
-    // Route::group(['prefix' => 'stores'], function () {
-    //     Route::get('', 'StoreController@index')->name('store.index');
-    //     Route::get('/create', 'StoreController@create')->name('store.create');
-    //     Route::post('/store', 'StoreController@store')->name('store.store');
-    //     Route::get('/{id}/edit', 'StoreController@edit')->name('store.edit');
-    //     Route::post('/update/{id}', 'StoreController@update')->name('store.update');
-    //     Route::get('/delete/{id}', 'StoreController@destroy')->name('store.delete');
-    // });
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
     Route::resource('stores', 'StoreController');
     Route::resource('products', 'ProductController');
 });
+
+Auth::routes();
+
