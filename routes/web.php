@@ -80,7 +80,7 @@ Route::get('', function () {
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
     Route::resource('stores', 'StoreController');
     Route::resource('products', 'ProductController');
+    Route::resource('categories', 'CategoryController');
 });
 
 Auth::routes();
-
