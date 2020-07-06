@@ -3,20 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreRequest;
 use App\Store;
 use App\User;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 
 class StoreController extends Controller
 {
-
-    private $request;
-
-    public function __construct(Request $request)
-    {
-        $this->request = $request;
-    }
 
     public function index()
     {
@@ -30,7 +23,7 @@ class StoreController extends Controller
         return view('admin.store.create', ['users' => $users]);
     }
 
-    public function store()
+    public function store(StoreRequest $request)
     {
         $data = $this->request->all();
         $user = auth()->user();
@@ -46,11 +39,11 @@ class StoreController extends Controller
         return view('admin.store.edit', ['store' => $store]);
     }
 
-    public function update($id)
+    public function update(StoreRequest $request, $id)
     {
 
         $store = Store::find($id);
-        $store->update($this->request->all());
+        $store->update($request->all());
         flash('Loja atualizado com sucesso')->success();
         return redirect()->route('stores.index');
     }
