@@ -9,6 +9,47 @@
     <title>@yield('title')</title>
 </head>
 <body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark" style="margin-bottom: 50px">
+        <a class="navbar-brand" href="{{ route('home') }}">Marketplace_l6</a>
+        <button class="navbar-toggler d-lg-none bg-default" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+            @auth
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item @if(request()->is('admin/stores')) active @endif">
+                    <a class="nav-link" href="{{ route('stores.index') }}">Lojas <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item @if(request()->is('admin/products'))active @endif">
+                    <a class="nav-link" href="{{ route('products.index') }}">Produtos</a>
+                </li>
+            </ul>
+            @endauth
+                <ul class="navbar-nav ml-auto">
+                    @auth
+                        <li class="nav-item">
+                            <form action="{{ route('logout') }}" method="post">
+                                @csrf
+                                <button class="btn text-white" type="submit">Sair
+                                    <i class="fas fa-sign-out-alt    "></i>
+                                </button>
+                            </form>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            @if (request()->is('login'))
+                                <a class="nav-link" href="{{ route('register') }}">Register</a>
+                            @else    
+                                <a class="nav-link" href="{{ route('login') }}">Login
+                                    <i class="fas fa-sign-in-alt"></i>
+                                </a>
+                            @endif
+                        </li>
+                    @endauth
+                    </ul>
+        </div>
+    </nav>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
