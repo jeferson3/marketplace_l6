@@ -2,6 +2,12 @@
 @section('title', 'Edit Product')
 
 @section('root')
+<div class="row">
+    <a href="{{ url()->previous() }}" style="text-decoration: none;">
+        <i class="fas fa-arrow-left my-auto mx-2"></i>
+        Voltar
+    </a>
+</div>
 
 <h1>Editar Produto</h1>
     <form action="{{ route('products.update', $product->id) }}" method="POST">
@@ -28,6 +34,14 @@
         <div  class="form-group">
             <label for="body">Conteúdo</label>
             <textarea type="text" rows="5" class="form-control" name="body" id="body"> {{ $product->body }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="categories">Categorias</label>
+            <select class="form-control" name="categories[]" multiple>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}" @if($product->category->contains($category)) selected @endif>{{ $category->name }}</option>
+                @endforeach
+            </select>
         </div>
 
         <div  class="form-group">
