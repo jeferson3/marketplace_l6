@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Product;
 use App\Store;
-use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -25,6 +25,7 @@ class ProductController extends Controller
      */
     public function index()
     {
+        // dd(auth()->user()->store());
         $products = $this->product::paginate(10);
         return view('admin.product.index', ['products' => $products]);
     }
@@ -36,8 +37,10 @@ class ProductController extends Controller
      */
     public function create()
     {
+
+        $categories = Category::all(['id', 'name']);
         $stores = Store::all(['id', 'name']);
-        return view('admin.product.create', ['stores' => $stores]);
+        return view('admin.product.create', ['stores' => $stores, 'categories'=>$categories]);
     }
 
     /**
@@ -47,9 +50,10 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        $product = $request->all();
-        $store = Store::findOrFail($product['store']);
-        $store->product()->create($product);
+        $data = $request->all();
+        $store = auth()->user()->store;
+        $product = $store->product()->create($data);
+        $product->category()->sync($data['categories']);
 
         flash('Produto criado com sucesso')->success();
         return redirect()->route('products.index');
@@ -73,8 +77,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
+        $categories = Category::all(['id', 'name']);
         $product = $this->product->findOrFail($id);
-        return view('admin.product.edit', ['product' => $product]);
+        return view('admin.product.edit', ['product' => $product, 'categories'=>$categories]);
     }
 
     /**
@@ -84,8 +89,12 @@ class ProductController extends Controller
      */
     public function update($id, ProductRequest $request)
     {
+        $data = $request->all();
+        
         $product = $this->product::findOrFail($id);
-        $product->update($request->all());
+        $product->update($data);
+        $product->category()->sync($data['categories']);
+
         flash('Produto atualizado com sucesso')->success();
 
         return redirect()->route('products.index');
