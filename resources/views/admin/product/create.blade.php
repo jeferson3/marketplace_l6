@@ -59,6 +59,14 @@
                 </small>
             @enderror
         </div>
+        <div class="form-group">
+            <label for="categories">Categorias</label>
+            <select class="form-control" name="categories[]" multiple>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
+            </select>
+        </div>
         <div  class="form-group">
             <button type="submit" class="btn btn-outline-primary">Criar produto</button>
         </div>
