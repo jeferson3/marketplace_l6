@@ -11,14 +11,20 @@ use Illuminate\Http\Request;
 class StoreController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('user.has.store')->only(['create', 'store']);
+    }
+
     public function index()
     {
-        $stores = Store::paginate(10);
-        return view('admin.store.index', ['stores' => $stores]);
+        $store = auth()->user()->store;
+        return view('admin.store.index', ['store' => $store]);
     }
 
     public function create()
     {
+        $this->middleware(['UserHasStore']);
         $users = User::all(['id', 'name']);
         return view('admin.store.create', ['users' => $users]);
     }
