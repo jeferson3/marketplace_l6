@@ -3,7 +3,7 @@
 @section('root')
 
     <div class="row">
-        <a href="{{ url()->previous() }}" style="text-decoration: none;">
+        <a href="{{ route('categories.index') }}" style="text-decoration: none;">
             <i class="fas fa-arrow-left my-auto mx-2"></i>
             Voltar
 
