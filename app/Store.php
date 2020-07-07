@@ -9,7 +9,7 @@ class Store extends Model //procura por uma tabela chamada stores
     // protected $table = 'NomeDaTabela'; //aqui pode mudar o nome da tabela ao qual o model está associado;
 
     protected $fillable = [
-        'name', 'description', 'phone','mobile_phone','slug'
+        'name', 'description', 'phone','mobile_phone','slug', 'logo'
     ];
 
     public function user(){
