@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
     <title>@yield('title')</title>
+    <style>
+        h1,h2,h3,h4,h5{
+            color: grey;
+        }
+    </style>
 
 </head>
 <body>
@@ -65,11 +70,7 @@
         </div>
     </nav>
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                @include('flash::message')
-            </div>
-        </div>
+        @include('flash::message') 
         @yield('root')    
     </div>
 </body>
