@@ -3,7 +3,7 @@
 
 @section('root')
     <div class="row">
-        <a href="{{ url()->previous() }}" style="text-decoration: none;">
+        <a href="{{ route('categories.index') }}" style="text-decoration: none;">
             <i class="fas fa-arrow-left my-auto mx-2"></i>
             Voltar
         </a>
@@ -15,15 +15,26 @@
 
         <div  class="form-group">
             <label for="name">Nome</label>
-            <input type="text" class="form-control" name="name" id="name" value="{{ $category->name }}">
+            <input type="text" class="form-control @error('name')is-invalid @enderror" name="name" id="name" value="{{ $category->name }}">
+            @error('name')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
         <div  class="form-group">
             <label for="description">Descrição</label>
             <input type="text" class="form-control" name="description" id="description" value="{{ $category->description }}">
+        
         </div>
         <div  class="form-group">
             <label for="description">Slug</label>
-            <input type="text" class="form-control" name="slug" id="slug" value="{{ $category->slug }}">
+            <input type="text" class="form-control @error('slug')is-invalid @enderror" name="slug" id="slug" value="{{ $category->slug }}">
+            @error('slug')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
         <div  class="form-group">
             <button type="submit" class="btn btn-outline-primary">Atualizar categoria</button>
