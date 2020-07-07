@@ -10,7 +10,7 @@
         </a>
     </div>
     <h1>Criar Produto</h1>
-    <form action="{{ route('products.store') }}" method="POST">
+    <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         
         <div  class="form-group">
@@ -67,6 +67,17 @@
                 @endforeach
             </select>
         </div>
+
+
+        <div  class="form-group">
+            <input type="file" class="@error('name') is-invalid @enderror" name="photos[]" id="photos" multiple>
+            @error('photos')
+                <small class="invalid-feedback">
+                    {{ $message }}
+                </small>
+            @enderror
+        </div>
+
         <div  class="form-group">
             <button type="submit" class="btn btn-outline-primary">Criar produto</button>
         </div>
