@@ -2,13 +2,13 @@
 @section('title', 'Create Store')
 @section('root')
 <div class="row">
-        <a href="{{ url()->previous() }}" style="text-decoration: none;">
+        <a href="{{ route('stores.index') }}" style="text-decoration: none;">
             <i class="fas fa-arrow-left my-auto mx-2"></i>
             Voltar
         </a>
     </div>
     <h1>Criar loja</h1>
-    <form action="{{ route('stores.store') }}" method="POST">
+    <form action="{{ route('stores.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div  class="form-group">
             <label for="name">Nome</label>
@@ -54,6 +54,14 @@
                     {{ $message }}
                 @enderror
             </small>
+        </div>
+        <div  class="form-group">
+            <input type="file" class="form-control-file @error('name') is-invalid @enderror" name="logo" id="logo">
+            @error('logo')
+                <small class="invalid-feedback">
+                    {{ $message }}
+                </small>
+            @enderror
         </div>
         <div  class="form-group">
             <button type="submit" class="btn btn-outline-primary">Criar loja</button>
