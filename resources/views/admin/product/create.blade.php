@@ -1,5 +1,5 @@
 @extends('template.app')
-@section('title', 'Create Store')
+@section('title', 'Create Product')
 @section('root')
 
     <div class="row">
