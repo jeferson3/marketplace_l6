@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Product;
 use App\Store;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -25,8 +26,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        // dd(auth()->user()->store());
-        $products = $this->product::paginate(10);
+        $userStore = auth()->user()->store;
+        $products = $userStore->product()->paginate(10);
         return view('admin.product.index', ['products' => $products]);
     }
 
@@ -50,10 +51,16 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
+
         $data = $request->all();
         $store = auth()->user()->store;
         $product = $store->product()->create($data);
         $product->category()->sync($data['categories']);
+
+        if($request->hasFile('photos')){
+            $images = $this->imageUpload($request, 'image');
+            $product->photo()->createMany($images);
+        }
 
         flash('Produto criado com sucesso')->success();
         return redirect()->route('products.index');
@@ -90,7 +97,7 @@ class ProductController extends Controller
     public function update($id, ProductRequest $request)
     {
         $data = $request->all();
-        
+
         $product = $this->product::findOrFail($id);
         $product->update($data);
         $product->category()->sync($data['categories']);
@@ -112,5 +119,16 @@ class ProductController extends Controller
         flash('Produto deletado com sucesso')->success();
 
         return redirect()->route('products.index');
+    }
+    private function imageUpload(Request $request, $imageColumn)
+    {
+        $images = $request->file('photos');
+
+        $imagesList = [];
+        foreach ($images as $image) {
+            $imagesList[] = [$imageColumn => $image->store('products', 'public')];
+        }
+
+        return $imagesList;
     }
 }
