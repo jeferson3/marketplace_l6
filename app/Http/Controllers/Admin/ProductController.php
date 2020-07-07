@@ -41,7 +41,7 @@ class ProductController extends Controller
 
         $categories = Category::all(['id', 'name']);
         $stores = Store::all(['id', 'name']);
-        return view('admin.product.create', ['stores' => $stores, 'categories'=>$categories]);
+        return view('admin.product.create', ['stores' => $stores, 'categories' => $categories]);
     }
 
     /**
@@ -57,7 +57,7 @@ class ProductController extends Controller
         $product = $store->product()->create($data);
         $product->category()->sync($data['categories']);
 
-        if($request->hasFile('photos')){
+        if ($request->hasFile('photos')) {
             $images = $this->imageUpload($request, 'image');
             $product->photo()->createMany($images);
         }
@@ -86,7 +86,7 @@ class ProductController extends Controller
     {
         $categories = Category::all(['id', 'name']);
         $product = $this->product->findOrFail($id);
-        return view('admin.product.edit', ['product' => $product, 'categories'=>$categories]);
+        return view('admin.product.edit', ['product' => $product, 'categories' => $categories]);
     }
 
     /**
@@ -101,6 +101,11 @@ class ProductController extends Controller
         $product = $this->product::findOrFail($id);
         $product->update($data);
         $product->category()->sync($data['categories']);
+
+        if ($request->hasFile('photos')) {
+            $images = $this->imageUpload($request, 'image');
+            $product->photo()->createMany($images);
+        }
 
         flash('Produto atualizado com sucesso')->success();
 
