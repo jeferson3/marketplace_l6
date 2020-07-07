@@ -3,7 +3,7 @@
 @section('root')
 
     <div class="row">
-        <a href="{{ url()->previous() }}" style="text-decoration: none;">
+        <a href="{{ route('products.index') }}" style="text-decoration: none;">
             <i class="fas fa-arrow-left my-auto mx-2"></i>
             Voltar
 
@@ -70,7 +70,7 @@
 
 
         <div  class="form-group">
-            <input type="file" class="@error('name') is-invalid @enderror" name="photos[]" id="photos" multiple>
+            <input type="file" class="form-control-file @error('photos') is-invalid @enderror" name="photos[]" id="photos" multiple>
             @error('photos')
                 <small class="invalid-feedback">
                     {{ $message }}
@@ -82,4 +82,7 @@
             <button type="submit" class="btn btn-outline-primary">Criar produto</button>
         </div>
     </form>
+    @foreach ($errors->get('photos') as $error)
+        {{$error}}
+    @endforeach
 @endsection
