@@ -18,6 +18,7 @@
                 </tr>
             </thead>
             <tbody>
+                @isset($products)
                         @foreach($products as $product)
                             <tr>
                                 <td>{{ $product->id }}</td>
@@ -39,11 +40,12 @@
                                 </td> 
                             </tr>    
                         @endforeach
+                @endisset
                 </tbody>
             </table>
         </div>
     </div>
     <div class="row justify-content-center">
-        {{ $products->links() }}
+        {{ $products->links()}}
     </div>
 @endsection
