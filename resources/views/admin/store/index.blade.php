@@ -7,7 +7,7 @@
                 <div class="form-group">
                     <a class="btn btn-success" href="{{ route('stores.create') }}">Cadastrar loja</a>
                 </div>
-            @endif
+            @else
             <table class="table table-responsive table-striped">
                 <thead>
                     <tr>
@@ -39,6 +39,7 @@
                     </tr>    
                 </tbody>
             </table>
+            @endif
         </div>
     </div>
 @endsection
