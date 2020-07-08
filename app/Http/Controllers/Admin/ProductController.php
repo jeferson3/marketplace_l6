@@ -29,9 +29,14 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $userStore = auth()->user()->store;
-        $products = $userStore->product()->paginate(10);
-        return view('admin.product.index', ['products' => $products]);
+        if(auth()->user()->store){
+            $userStore = auth()->user()->store;
+            $products = $userStore->product()->paginate(10);
+            return view('admin.product.index', ['products' => $products]);
+        } else {
+            flash('Voce não possui uma loja cadastrada')->warning();
+            return redirect()->route('stores.index');
+        }
     }
 
     /**
@@ -54,7 +59,6 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-
         $data = $request->all();
         $store = auth()->user()->store;
         $product = $store->product()->create($data);
@@ -100,7 +104,6 @@ class ProductController extends Controller
     public function update($id, ProductRequest $request)
     {
         $data = $request->all();
-
         $product = $this->product::findOrFail($id);
         $product->update($data);
         $product->category()->sync($data['categories']);
