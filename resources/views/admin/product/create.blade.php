@@ -40,16 +40,6 @@
                 </small>
             @enderror
         </div>
-        
-        <div  class="form-group">
-            <label for="slug">Slug</label>
-            <input type="text" class="form-control @error('slug') is-invalid @enderror" name="slug" id="slug" value="{{old('slug')}}">
-            @error('slug')
-                <small class="invalid-feedback">
-                    {{ $message }}
-                </small>
-            @enderror
-        </div>
         <div  class="form-group">
             <label for="body">Conteúdo</label>
             <textarea type="text" rows="5" class="form-control @error('body') is-invalid @enderror" name="body" id="body">
