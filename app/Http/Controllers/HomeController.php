@@ -2,27 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    private $product;
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
+    public function __construct(Product $product)
+    {
+        $this->product = $product;
+    }
+    
     public function index()
     {
-        return view('home');
+        $products = $this->product->limit(8)->orderBy('id', 'DESC')->get(); //busca os 8 primeiros produtos
+        // dd($products);
+        return view('welcome', ['products'=>$products]);
+    }
+    public function single($slug)
+    {
+        $product = $this->product->whereSlug($slug)->first(); 
+        // dd($product);
+        if($product)
+            return view('single', ['product'=>$product]);
+        
+        return view('welcome', ['products' => Product::limit(8)]);
+        
     }
 }
