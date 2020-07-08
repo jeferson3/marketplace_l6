@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     use UploadTrait;
-    
+
     private $product;
 
     public function __construct(Product $product)
@@ -29,7 +29,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        if(auth()->user()->store){
+        if (auth()->user()->store) {
             $userStore = auth()->user()->store;
             $products = $userStore->product()->paginate(10);
             return view('admin.product.index', ['products' => $products]);
@@ -60,10 +60,12 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         $data = $request->all();
+        $categories = $request->get('categories', null);
+
         $store = auth()->user()->store;
         $product = $store->product()->create($data);
-        $product->category()->sync($data['categories']);
-        
+        $product->category()->sync($categories);
+
         if ($request->hasFile('photos')) {
             $images = $this->imageUpload($request->file('photos'), 'image');
             $product->photo()->createMany($images);
@@ -104,9 +106,14 @@ class ProductController extends Controller
     public function update($id, ProductRequest $request)
     {
         $data = $request->all();
+        $categories = $request->get('categories', null);
+
         $product = $this->product::findOrFail($id);
         $product->update($data);
-        $product->category()->sync($data['categories']);
+
+        if(!is_null($categories)){
+            $product->category()->sync($categories);
+        }
 
         if ($request->hasFile('photos')) {
             $images = $this->imageUpload($request->file('photos'), 'image');
