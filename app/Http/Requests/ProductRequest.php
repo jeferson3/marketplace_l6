@@ -29,7 +29,7 @@ class ProductRequest extends FormRequest
             'price' => ['required'],
             'body' => ['required', 'min:10'],
             'slug' => ['required'],
-            'photos'=> ['image']
+            'photos.*'=> ['image'] //photos retorna uma array de imagens
         ];
     }
     public function messages()
