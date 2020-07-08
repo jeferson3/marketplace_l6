@@ -63,8 +63,8 @@
         </div>
 
         <div  class="form-group">
-            <input type="file" class="form-control-file @error('photos') is-invalid @enderror" name="photos[]" id="photos" multiple>
-            @error('photos')
+            <input type="file" class="form-control-file @error('photos.*') is-invalid @enderror" name="photos[]" id="photos" multiple>
+            @error('photos.*')
                 <small class="invalid-feedback">
                     {{ $message }}
                 </small>
