@@ -55,15 +55,6 @@
                 @enderror
             </div>
             <div  class="form-group">
-                <label for="slug">Slug</label>
-                <input type="text" class="form-control @error('')is-invalid @enderror" name="slug" id="slug" value="{{ $store->slug }}">
-                @error('slug')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
-            <div  class="form-group">
                 <input type="file" class="form-control-file @error('logo') is-invalid @enderror" name="logo" id="logo">
                 @error('logo')
                     <small class="invalid-feedback">
