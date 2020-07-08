@@ -28,15 +28,6 @@
         
         </div>
         <div  class="form-group">
-            <label for="description">Slug</label>
-            <input type="text" class="form-control @error('slug')is-invalid @enderror" name="slug" id="slug" value="{{ $category->slug }}">
-            @error('slug')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-            @enderror
-        </div>
-        <div  class="form-group">
             <button type="submit" class="btn btn-outline-primary">Atualizar categoria</button>
         </div>
     </form>
