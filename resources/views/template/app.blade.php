@@ -11,6 +11,13 @@
         h1,h2,h3,h4,h5{
             color: grey;
         }
+        .teste{
+            /* width: 300px; */
+            position: absolute;
+            top: 5px;
+            left: 40%;
+            /* left: 50%; */
+        }
     </style>
 
 </head>
@@ -70,7 +77,9 @@
         </div>
     </nav>
     <div class="container">
-        @include('flash::message') 
+        <div class="teste">
+            @include('flash::message') 
+        </div>
         @yield('root')    
     </div>
 </body>
