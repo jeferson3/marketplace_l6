@@ -31,17 +31,6 @@
                 </small>
             @enderror
         </div>
-        
-        <div  class="form-group">
-            <label for="description">Slug</label>
-            <input type="text" class="form-control @error('slug') is-invalid @enderror" name="slug" id="slug">
-            @error('slug')
-                <small class="invalid-feedback">
-                    {{ $message }}
-                </small>
-            @enderror
-        </div>
-
         <div  class="form-group">
             <button type="submit" class="btn btn-outline-primary">Criar categoria</button>
         </div>
