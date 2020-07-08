@@ -56,7 +56,7 @@
             </small>
         </div>
         <div  class="form-group">
-            <input type="file" class="form-control-file @error('name') is-invalid @enderror" name="logo" id="logo">
+            <input type="file" class="form-control-file @error('logo') is-invalid @enderror" name="logo" id="logo">
             @error('logo')
                 <small class="invalid-feedback">
                     {{ $message }}
