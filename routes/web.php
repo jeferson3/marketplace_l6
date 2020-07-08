@@ -1,18 +1,6 @@
 <?php
 
-use App\Category;
 use App\Product;
-use App\Store;
-use App\User;
-
-
-Route::get('users/{id?}', function ($id = null) {
-    if ($id) {
-        return User::find($id);
-    }
-    return User::All();
-});
-
 
 // valores de relacionamentos
 
@@ -69,13 +57,17 @@ Route::get('/teste', function () {
 
     // Product::find(41)->category()->attach([1]); //adciona uma categoria a um produto
     // Product::find(41)->category()->detach([1]); //remove uma categoria de um produto
-    return Product::find(41)->category;
+    return "teste";
 });
 
-Route::get('', function () {
+Route::get('', 'HomeController@index')->name('home');
+Route::get('product/{id}', 'HomeController@single')->name('product.single');
 
-    return redirect('admin/stores');
-})->name('home');
+Route::group(['prefix' => 'cart', 'as'=>'cart.'], function () {
+    Route::get('', 'CartController@index')->name('index');
+    Route::post('/add', 'CartController@add')->name('add');
+    Route::get('/remove/{id}', 'CartController@remove')->name('remove');
+});
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
     Route::resource('stores', 'StoreController');
