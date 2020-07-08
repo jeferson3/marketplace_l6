@@ -35,14 +35,6 @@
             {{$message}}
             @enderror
         </div>
-        
-        <div  class="form-group">
-            <label for="slug">Slug</label>
-            <input type="text" class="form-control @error('slug') is-invalid @enderror" name="slug" id="slug" value="{{ $product->slug }}">
-            @error('slug')
-            {{$message}}
-            @enderror
-        </div>
         <div  class="form-group">
             <label for="body">Conteúdo</label>
             <textarea type="text" rows="5" class="form-control @error('body') is-invalid @enderror" name="body" id="body"> {{ $product->body }}</textarea>
@@ -52,16 +44,12 @@
         </div>
         <div class="form-group">
             <label for="categories">Categorias</label>
-            <select class="form-control @error('categories') is-invalid @enderror" name="categories[]" multiple>
+            <select class="form-control" name="categories[]" multiple>
                 @foreach ($categories as $category)
                     <option value="{{ $category->id }}" @if($product->category->contains($category)) selected @endif>{{ $category->name }}</option>
                 @endforeach
             </select>
-            @error('categories')
-
-            @enderror
         </div>
-
         <div  class="form-group">
             <input type="file" class="form-control-file @error('photos.*') is-invalid @enderror" name="photos[]" id="photos" multiple>
             @error('photos.*')
