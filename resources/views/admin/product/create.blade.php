@@ -15,7 +15,7 @@
         
         <div  class="form-group">
             <label for="name">Nome</label>
-            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name">
+            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" value="{{old('name')}}">
             @error('name')
                 <small class="invalid-feedback">
                     {{ $message }}
@@ -24,7 +24,7 @@
         </div>
         <div  class="form-group">
             <label for="description">Descrição</label>
-            <input type="text" class="form-control @error('name') is-invalid @enderror" name="description" id="description">
+            <input type="text" class="form-control @error('description') is-invalid @enderror" name="description" id="description" value="{{old('description')}}">
             @error('description')
                 <small class="invalid-feedback">
                     {{ $message }}
@@ -33,7 +33,7 @@
         </div>
         <div  class="form-group">
             <label for="price">Preço</label>
-            <input type="text" class="form-control @error('name') is-invalid @enderror" name="price" id="price">
+            <input type="text" class="form-control @error('price') is-invalid @enderror" name="price" id="price" value="{{old('price')}}">
             @error('price')
                 <small class="invalid-feedback">
                     {{ $message }}
@@ -43,7 +43,7 @@
         
         <div  class="form-group">
             <label for="slug">Slug</label>
-            <input type="text" class="form-control @error('name') is-invalid @enderror" name="slug" id="slug">
+            <input type="text" class="form-control @error('slug') is-invalid @enderror" name="slug" id="slug" value="{{old('slug')}}">
             @error('slug')
                 <small class="invalid-feedback">
                     {{ $message }}
@@ -52,7 +52,9 @@
         </div>
         <div  class="form-group">
             <label for="body">Conteúdo</label>
-            <textarea type="text" rows="5" class="form-control @error('name') is-invalid @enderror" name="body" id="body"></textarea>
+            <textarea type="text" rows="5" class="form-control @error('body') is-invalid @enderror" name="body" id="body">
+                {{old('body')}}
+            </textarea>
             @error('body')
                 <small class="invalid-feedback">
                     {{ $message }}
@@ -70,8 +72,8 @@
 
 
         <div  class="form-group">
-            <input type="file" class="form-control-file @error('photos') is-invalid @enderror" name="photos[]" id="photos" multiple>
-            @error('photos')
+            <input type="file" class="form-control-file @error('photos.*') is-invalid @enderror" name="photos[]" id="photos" multiple>
+            @error('photos.*')
                 <small class="invalid-feedback">
                     {{ $message }}
                 </small>
@@ -82,7 +84,4 @@
             <button type="submit" class="btn btn-outline-primary">Criar produto</button>
         </div>
     </form>
-    @foreach ($errors->get('photos') as $error)
-        {{$error}}
-    @endforeach
 @endsection
