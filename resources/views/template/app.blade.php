@@ -11,13 +11,6 @@
         h1,h2,h3,h4,h5{
             color: grey;
         }
-        .teste{
-            /* width: 300px; */
-            position: absolute;
-            top: 5px;
-            left: 40%;
-            /* left: 50%; */
-        }
     </style>
 
 </head>
@@ -73,13 +66,18 @@
                             @endif
                         </li>
                     @endauth
+                    <li class="nav-item">
+                        <a href="{{route('cart.index')}}" class="nav-link">
+                            <i class="fas fa-cart-arrow-down">
+                            </i>
+                            <span class="badge badge-danger">@if (session()->has('cart')) {{count(session()->get('cart'))}} @else 0 @endif</span>
+                        </a>
+                    </li>
                     </ul>
         </div>
     </nav>
     <div class="container">
-        <div class="teste">
-            @include('flash::message') 
-        </div>
+        @include('flash::message') 
         @yield('root')    
     </div>
 </body>
