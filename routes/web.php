@@ -70,6 +70,12 @@ Route::group(['prefix' => 'cart', 'as'=>'cart.'], function () {
     Route::get('/cancel', 'CartController@cancel')->name('cancel');
 });
 
+Route::group(['prefix' => 'checkout', 'as' => 'checkout.' ], function () {
+    Route::get('', 'CheckoutController@index')->name('index');
+});
+
+
+
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
     Route::resource('stores', 'StoreController');
     Route::resource('products', 'ProductController');
