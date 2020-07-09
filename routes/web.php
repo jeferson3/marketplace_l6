@@ -67,6 +67,7 @@ Route::group(['prefix' => 'cart', 'as'=>'cart.'], function () {
     Route::get('', 'CartController@index')->name('index');
     Route::post('/add', 'CartController@add')->name('add');
     Route::get('/remove/{id}', 'CartController@remove')->name('remove');
+    Route::get('/cancel', 'CartController@cancel')->name('cancel');
 });
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
