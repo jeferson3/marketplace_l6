@@ -11,6 +11,7 @@ class CartController extends Controller
     {
         // dd(session()->get('cart'));
         $cart = session()->has('cart') ? session()->get('cart') : [];
+
         
         return view('cart', ['cart' => $cart]);
     }
@@ -20,8 +21,15 @@ class CartController extends Controller
         $product = $request->get('product');
 
         if (session()->has('cart')) {
-            session()->push('cart', $product);
 
+            $products = session()->get('cart');
+            $productSlugs = array_column($products, 'slug');
+            if (in_array($product['slug'], $productSlugs)) {
+                $products = $this->productIncrement($products, $product['amount'], $product['slug']);
+                session()->put('cart', $products);
+            } else {
+                session()->push('cart', $product);
+            }
         } else {
             $products[] = $product;
             session()->put('cart', $products);
@@ -47,4 +55,23 @@ class CartController extends Controller
 
         return redirect()->route('cart.index');
     }
+    public function cancel()
+    {
+        session()->forget('cart'); //remove todos os prpdutos da sessão cart
+        flash('Compra cancelada')->success();
+        return redirect()->route('home');
+
+    }
+    public function productIncrement($products, $amount, $slug)
+    {
+        $products = array_map(function($line) use($amount, $slug){
+            if($line['slug'] == $slug){
+                $line['amount'] += $amount;
+            }
+            return $line;
+        }, $products);
+
+        return $products;
+    }
+
 }
