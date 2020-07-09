@@ -16,7 +16,7 @@ class HomeController extends Controller
     
     public function index()
     {
-        $products = $this->product->limit(8)->orderBy('id', 'DESC')->get(); //busca os 8 primeiros produtos
+        $products = $this->product->limit(9)->orderBy('id', 'DESC')->get(); //busca os 8 primeiros produtos
         // dd($products);
         return view('welcome', ['products'=>$products]);
     }
