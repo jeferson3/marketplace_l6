@@ -67,13 +67,6 @@
                             @endif
                         </li>
                     @endauth
-                    <li class="nav-item">
-                        <a href="{{route('cart.index')}}" class="nav-link">
-                            <i class="fas fa-cart-arrow-down">
-                            </i>
-                            <span class="badge badge-danger">@if (session()->has('cart')) {{count(session()->get('cart'))}} @else 0 @endif</span>
-                        </a>
-                    </li>
                     </ul>
         </div>
     </nav>
