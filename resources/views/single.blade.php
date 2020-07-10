@@ -3,45 +3,22 @@
 @section('root')
 
     <div class="row">
-        
         <div class="col-md-4">
-
             @if ($product->photo->count())
-                <img class="img-fluid" src="{{ asset('storage/'.$product->photo->first()->image) }}">
-                <div class="row mt-2">
-                    <div class="col-md-4">
-
-                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
+                <img class="img-fluid" src="{{ asset('storage/'.$product->photo->first()->image) }}" style="height:80%; width:100%;">
+                    <div class="mt-2">
+                        <div class="row">
                             @foreach ($product->photo as $key => $photo)
-                                @if($key == 0)
-                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                            @else
-                                <li data-target="#carouselExampleIndicators" data-slide-to="{{$key}}"></li>
+                                @if ($key == 3)
+                                    @break
                                 @endif
-                            @endforeach
-                        </ol>
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img class="d-block w-100 img-fluid" src="{{ asset('storage') .'/'. $product->photo->first()->image}}">
-                            </div>
-                            @foreach ($product->photo as $photo)
-                            <div class="carousel-item">
-                                <img class="d-block w-100 img-fluid" src="{{ asset('storage/'.$photo->first()->image) }}">
-                            </div>
+                                <div class="col-4">
+                                    <img class="img-fluid" src="{{ asset('storage/'.$photo->image) }}" style="height:80%; width:100%;">
+                                </div>
+
                             @endforeach
                         </div>
-                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Anterior</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Próximo</span>
-                        </a>
                     </div>
-                </div>
-                </div>
             @else
                 <img class="card-img-top" src="{{ asset('assets/no-photo.jpg') }}" style="height: 200px;">
             @endif
