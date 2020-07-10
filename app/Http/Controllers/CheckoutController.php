@@ -11,6 +11,14 @@ class CheckoutController extends Controller
         if(!auth()->check())
             return redirect()->route('login');
 
-        print('check');
+        
+        return view('checkout');
+        
+    }
+    public function order(){
+
+        session()->forget('cart');
+
+        return view('thanks');
     }
 }
