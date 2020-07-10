@@ -72,6 +72,7 @@ Route::group(['prefix' => 'cart', 'as'=>'cart.'], function () {
 
 Route::group(['prefix' => 'checkout', 'as' => 'checkout.' ], function () {
     Route::get('', 'CheckoutController@index')->name('index');
+    Route::post('order', 'CheckoutController@order')->name('order');
 });
 
 
