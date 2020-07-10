@@ -63,6 +63,7 @@ Route::get('/teste', function () {
 Route::get('', 'HomeController@index')->name('home');
 Route::get('product/{id}', 'HomeController@single')->name('product.single');
 Route::get('/category/{slug}', 'CategoryController@index')->name('category.single');
+Route::get('/store/{slug}', 'StoreController@index')->name('store.single');
 
 Route::group(['prefix' => 'cart', 'as'=>'cart.'], function () {
     Route::get('', 'CartController@index')->name('index');
