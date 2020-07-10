@@ -1,14 +1,13 @@
-@extends('template.app')
+@extends('template.front')
 
 @section('root')
     <div class="row justify-content-center">
         @foreach ($products as $product)
             <div class="col-md-4">
-                <div class="card m-2" style="width: 99%;">
                     @if ($product->photo->count())
-                        <img class="card-img-top" src="{{ asset('storage/'.$product->photo->first()->image) }}" style="height: 200px;">
+                        <img class="img-fluid" src="{{ asset('storage/'.$product->photo->first()->image) }}" style="height: 200px; width:100%;">
                     @else
-                        <img class="card-img-top" src="{{ asset('assets/no-photo.jpg') }}" style="height: 200px;">
+                        <img class="img-fluid" src="{{ asset('assets/no-photo.jpg') }}" style="height: 200px; width:100%;">
                     @endif
                     <div class="card-body">
                         <h4 class="card-title">{{$product->name}}</h4>
@@ -21,7 +20,26 @@
                             Ver produto</a>
                     </div>
                 </div>
+                @endforeach
+            </div>
+        <hr>
+    <div class="row">
+        <div class="col-md-12 my-3">
+            <h2>Lojas em destaque</h2>
+            <hr>
+        </div>
+        @foreach ($stores as $store)
+        <div class="col-md-4">
+            @if($store->logo)
+                <img class="img-fluid" src="{{asset('storage').'/'.$store->logo}}" alt="logo {{$store->name}}" style="height: 150px; width:100%;">
+            @else
+                <img class="img-fluid" src="https://via.placeholder.com/600X300.png?text=logo" alt="Loja sem logo" style="height: 150px; width:100%;">
+            @endif
+                <h3>{{$store->name}}</h3>
+                <p>{{$store->description}}</p>
             </div>
         @endforeach
     </div>
+    <hr>
 @endsection
+
