@@ -15,7 +15,7 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-md navbar-light bg-light" style="margin-bottom: 50px">
+    <nav class="navbar navbar-expand-md navbar-light bg-primary" style="margin-bottom: 50px">
         <a class="navbar-brand" href="{{ route('home') }}">Marketplace_l6</a>
         <button class="navbar-toggler d-lg-none bg-default" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
             aria-expanded="false" aria-label="Toggle navigation">
@@ -27,7 +27,7 @@
                     <a class="nav-link" href="{{ route('home') }}">Home</a>
                 </li>
                 @foreach ($categories as $category)
-                    <li class="nav-item">
+                    <li class="nav-item @if(request()->is('category/'. $category->slug)) active @endif">
                         <a class="nav-link" href="{{route('category.single', $category->slug)}}">{{$category->name}}</a>
                     </li>
                 @endforeach
