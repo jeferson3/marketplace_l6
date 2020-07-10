@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\Store;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -16,9 +17,10 @@ class HomeController extends Controller
     
     public function index()
     {
-        $products = $this->product->limit(9)->orderBy('id', 'DESC')->get(); //busca os 8 primeiros produtos
+        $products = $this->product->limit(6)->orderBy('id', 'DESC')->get(); //busca os 8 primeiros produtos
         // dd($products);
-        return view('welcome', ['products'=>$products]);
+        $stores  = Store::limit(3)->orderBy('id','DESC')->get();
+        return view('welcome', ['products'=>$products, 'stores'=>$stores]);
     }
     public function single($slug)
     {
