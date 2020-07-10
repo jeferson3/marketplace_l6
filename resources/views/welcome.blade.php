@@ -37,6 +37,9 @@
             @endif
                 <h3>{{$store->name}}</h3>
                 <p>{{$store->description}}</p>
+                <p>
+                    <a class="btn btn-primary" href="{{route('store.single', $store->slug)}}">Visitar</a>
+                </p>
             </div>
         @endforeach
     </div>
