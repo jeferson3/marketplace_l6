@@ -21,7 +21,7 @@ class CreateProductTable extends Migration
             $table->string('body');
             $table->decimal('price', 10, 2);
             $table->string('slug');
-            $table->foreign('store_id')->references('id')->on('stores');
+            $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
             $table->timestamps();
         });
     }
