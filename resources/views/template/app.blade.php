@@ -85,6 +85,7 @@
     <script src="{{asset('js/app.js')}}"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js
     "></script>
+    <script src="https://cdn.rawgit.com/plentz/jquery-maskmoney/master/dist/jquery.maskMoney.min.js"></script>
 
   </body>
   <script>
