@@ -59,3 +59,16 @@
         </div>
     </form>
 @endsection
+@section('scripts')
+    <script>
+
+        var phone = $('#phone');
+        var mphone = $('#mobile_phone');
+
+        var im = new Inputmask("(99) 9999-9999");
+        im.mask(phone);
+
+        var im2 = new Inputmask("(99) 99999-9999");
+        im2.mask(mphone);
+    </script>
+@endsection
