@@ -75,3 +75,9 @@
         </div>
     </form>
 @endsection
+
+@section('scripts')
+    <script>
+        $('#price').maskMoney({prefix:'R$ ', thousands: '.', decimal: ','});
+    </script>
+@endsection
