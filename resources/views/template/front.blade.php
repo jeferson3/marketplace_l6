@@ -45,6 +45,36 @@
                             <span class="badge badge-danger">@if (session()->has('cart')) {{count(session()->get('cart'))}} @else 0 @endif</span>
                         </a>
                     </li>
+                    @auth
+                        <li class="nav-item">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <a href="#" class="nav-link dropdown-toggle" aria-label="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {{ auth()->user()->name }}
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <form id="logoutForm" action="{{ route('logout') }}" method="post" style="display: none">
+                                            @csrf
+                                        </form>
+                                        <a href="#" class="dropdown-item"
+                                            onclick="document.getElementById('logoutForm').submit();"
+                                        >Sair <i class="fas fa-sign-out-alt"></i></a>
+
+                                    </div>
+                                </span>
+                            </div>                            
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            @if (request()->is('login'))
+                                <a class="nav-link" href="{{ route('register') }}">Register</a>
+                            @else    
+                                <a class="nav-link" href="{{ route('login') }}">Login
+                                    <i class="fas fa-sign-in-alt"></i>
+                                </a>
+                            @endif
+                        </li>
+                    @endauth
                 </ul>
         </div>
     </nav>
