@@ -8,11 +8,12 @@ use App\Http\Requests\ProductRequest;
 use App\Product;
 use App\Store;
 use App\Traits\UploadTrait;
-use Illuminate\Http\Request;
+use App\Traits\PriceFormat;
 
 class ProductController extends Controller
 {
     use UploadTrait;
+    use PriceFormat;
 
     private $product;
 
@@ -60,6 +61,9 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         $data = $request->all();
+
+        $data['price'] = $this->formatPriceToDatabase($data['price']);
+
         $categories = $request->get('categories', null);
 
         $store = auth()->user()->store;
