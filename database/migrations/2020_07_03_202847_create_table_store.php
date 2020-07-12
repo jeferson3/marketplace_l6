@@ -24,7 +24,7 @@ class CreateTableStore extends Migration
             $table->string('mobile_phone');
             $table->string('slug');
 
-            $table->foreign('user_id')->references('id')->on('users'); //define a coluna id_user como chave estrangeira que é referencia da coluna id da tabela users
+            $table->foreign('user_id')->references('id')->on('users')->OnDelete('cascade'); //define a coluna id_user como chave estrangeira que é referencia da coluna id da tabela users
 
 
             $table->timestamps();
