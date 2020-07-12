@@ -11,7 +11,7 @@
     
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css
     ">
-    
+    <title>Marketplace_l6</title>
     <style>
         h1,h2,h3,h4,h5{
             color: grey;
