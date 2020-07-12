@@ -60,6 +60,8 @@ Route::get('/teste', function () {
     return "teste";
 });
 
+
+Route::redirect('/home', '/');
 Route::get('', 'HomeController@index')->name('home');
 Route::get('product/{id}', 'HomeController@single')->name('product.single');
 Route::get('/category/{slug}', 'CategoryController@index')->name('category.single');
@@ -79,7 +81,7 @@ Route::group(['prefix' => 'checkout', 'as' => 'checkout.' ], function () {
 
 
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth', 'user.is.admin']], function () {
     Route::resource('stores', 'StoreController');
     Route::resource('products', 'ProductController');
     Route::resource('categories', 'CategoryController');
