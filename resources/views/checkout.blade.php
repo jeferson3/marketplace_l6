@@ -48,13 +48,15 @@
         .addEventListener('submit', function(e) {
 
             e.preventDefault();
+            let btnSubmit = document.querySelector('button.btn');
 
             setTimeout(function() {
                 
                 document.querySelector('.form').submit();
             }, 3000)
 
-            document.querySelector('button.btn').setAttribute('disabled', 'disabled');
+            btnSubmit.innerHTML = 'Carregando...';
+            btnSubmit.setAttribute('disabled', 'disabled');
             
             toastr.success('Compra realizada com sucesso', 'Sucesso', {timeOut: 3000})
         });
