@@ -2,28 +2,25 @@
 
 @section('root')
 
-    <div class="row">
-        <div class="col-md-4">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
             @if ($product->photo->count())
-                <img class="img-fluid" src="{{ asset('storage/'.$product->photo->first()->image) }}" style="height:80%; width:100%;">
-                    <div class="mt-2">
-                        <div class="row">
-                            @foreach ($product->photo as $key => $photo)
-                                @if ($key == 3)
-                                    @break
-                                @endif
-                                <div class="col-4">
-                                    <img class="img-fluid" src="{{ asset('storage/'.$photo->image) }}" style="height:80%; width:100%;">
-                                </div>
-
-                            @endforeach
+                <img class="img-fluid thumb" src="{{ asset('storage/'.$product->photo->first()->image) }}" style="height:300px; width:100%;">
+                <div class="row mt-2 justify-content-center">
+                    @foreach ($product->photo as $key => $photo)
+                        @if ($key == 3)
+                            @break
+                        @endif
+                        <div class="col-4">
+                            <img class="img-fluid small" src="{{ asset('storage/'.$photo->image) }}" style="height:80%; width:100%;">
                         </div>
-                    </div>
+                    @endforeach
+                </div>
             @else
-                <img class="card-img-top" src="{{ asset('assets/no-photo.jpg') }}" style="height: 200px;">
+                <img class="img-fluid" src="{{ asset('assets/no-photo.jpg') }}" style="height: 200px;">
             @endif
         </div>
-        <div class="col-md-8">
+        <div class="col-md-7">
             <div class="form-group">
                 <h2>{{$product->name}}</h2>
                 <h3>
@@ -61,3 +58,27 @@
     </div>
 
 @endsection
+
+@section('scripts')
+    <script>
+        let thumb = document.querySelector('.thumb');
+        let small = document.querySelectorAll('.small');
+
+        small.forEach(el => {
+            el.addEventListener('click', function(){
+                let aux = el.src;
+                thumb.src = aux;
+
+            });
+        });
+    </script>
+@endsection
+
+
+
+
+
+
+
+
+
